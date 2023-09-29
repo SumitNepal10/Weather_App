@@ -1,0 +1,230 @@
+* {
+  font-family:'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-image: linear-gradient(to right, #2b88d8, #1fbf8e);
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-image: linear-gradient(to right, #06615c, #005476);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo img {
+  width: 100px;
+  height: auto;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-image: linear-gradient(rgb(255, 255, 255), white);
+  color: black;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+}
+
+.inputContainer input[type="text"] {
+  width: 300px;
+  padding: 8px;
+  margin-top: 8px;
+  margin-left: 30px;
+  font-size: 16px;
+  border: 1px;
+  border-radius: 20px;
+  border-color: aqua;
+}
+
+.searchBar button {
+  padding: 8px 12px;
+  margin-left: 1px;
+  margin-top: 8px;
+  font-size: 16px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.searchBar button:hover {
+  color: #c23410;
+}
+
+#clear {
+  top: 50%;
+  transform: translate(-50%);
+  width: 15px;
+  height: 15px;
+  margin-left: 330px;
+  margin-top: -25px;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#clear::before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 15px;
+  background: black;
+  transform: rotate(45deg);
+}
+
+#clear::after {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 15px;
+  background: black;
+  transform: rotate(315deg);
+}
+
+.cityWeather {
+  width: 350px;
+  height: 180px;
+  margin-top: 30px;
+  margin-left: 578px;
+  background-color: rgb(237, 231, 223);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.city {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.weatherIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.temperature {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.time {
+  text-align: right;
+}
+
+.date {
+  text-align: center;
+}
+
+.weatherDetails {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-left: 150px;
+  margin-top: 100px;
+}
+
+.weatherDetails div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 100px;
+  margin-top: 30px;
+  background-color: rgb(248, 224, 224);
+  width: 200px;
+  height: 75px;
+  font-size: 20px;
+}
+
+#loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+#loader img {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.line1 {
+  border-top: 2px solid rgb(255, 255, 255);
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: 20px;
+}
+
+.line2 {
+  border-top: 2px solid rgb(255, 255, 255);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-bottom: 5px;
+}
+
+h1 {
+  color: white;
+  margin-top: 70px;
+  margin-left: 42%;
+}
+
+/*Css for the test Html page */
+p {
+  color: white;
+  margin-top: 250px;
+  margin-left: 40%;
+  font-size: 50px;
+}

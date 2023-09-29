@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Forecaster</title>
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="script.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.png" alt="Logo" />
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="7_day_forecast.html">7 Days Forecast</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="searchBar">
+    <div class="inputContainer">
+      <input type="text" placeholder="Search for cities" name="Search" id="mySearch">
+      <button type="submit"><i class="fa fa-search"></i></button>
+      <div id="clear"></div>
+    </div>
+  </div>
+
+  <div class="line1"></div>
+
+  <div id="loader">
+    <img src="loader.gif" alt="loader" />
+  </div>
+
+  <div class="line2"></div>
+
+  <div class="searchResults"></div>
+</body>
+
+</html>
