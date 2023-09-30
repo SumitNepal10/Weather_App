@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Check if data is available
     if (data) {
       createWeatherElement(data);
+      runOncePerHour(data);
     } else {
       // Display "City Not Found" if data is not available
       const cityNotFound = document.createElement("h1");
@@ -26,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
       searchResultContainer.appendChild(cityNotFound);
     }
     loader.style.display = "none";
+
+    return data;
   }
 
   // Function to fetch weather data from the API
@@ -43,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return {
           cityName: data.name,
           country: data.sys.country,
+          timestamp: data.dt,
           weatherDesription: data.weather[0].description,
           weatherIcon: data.weather[0].icon,
           temperature: kelvinToCelsius(data.main.temp),
@@ -76,16 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
     return (kelvin - 273.15).toFixed(2);
   }
 
-  // Function to convert the time
+  // Function to convert the time to UK time
   function convertTime(time) {
-    const actualTime = new Date(time * 1000);
-    return actualTime.toLocaleTimeString();
+    const ukTime = new Date(time * 1000);
+    ukTime.setUTCHours(ukTime.getUTCHours());
+    return ukTime.toLocaleTimeString("en-GB", { timeZone: "Europe/London" });
   }
 
-  // Function to convert the date and time
+  // Function to convert the date and time to UK time (GMT or BST)
   function formatDateTime(timestamp) {
-    const date = new Date(timestamp * 1000);
-    return date.toLocaleDateString();
+    const ukDate = new Date(timestamp * 1000);
+    const year = ukDate.getUTCFullYear();
+    const month = (ukDate.getUTCMonth() + 1).toString().padStart(2, "0");
+    const day = ukDate.getUTCDate().toString().padStart(2, "0");
+
+    return `${year}-${month}-${day}(UK time)`;
   }
 
   // Function to create weather element and display it in the search results container
@@ -182,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Event listener for search button click
   if (searchButton) {
-    searchButton.addEventListener("click", function (event) {
+    searchButton.addEventListener("click", function () {
       const cityName = searchInput.value;
       if (cityName.length !== 0) {
         fetchData(cityName);
@@ -193,8 +202,77 @@ document.addEventListener("DOMContentLoaded", function () {
   // Event listener for clear button click
   clear.addEventListener("click", function () {
     searchInput.value = "";
+    clear.style.display = "none";
   });
 
-  // Display the weather of Leeds as default
-  fetchData("Leeds");
+  // hide cross while there is no input
+  searchInput.addEventListener("input", function () {
+    cityName = searchInput.value;
+    if (cityName.length != 0) {
+      clear.style.display = "block";
+    } else {
+      clear.style.display = "none";
+    }
+  });
+
+  // hide cross while loading the page
+  window.onload = () => {
+    clear.style.display = "none";
+  };
+
+  fetchData("leeds");
+
+  async function sendData(data) {
+    try {
+      let weatherData = {
+        city: data.cityName,
+        country: data.country,
+        weatherCondition: data.weatherDesription,
+        weatherIcon: data.weatherIcon,
+        temperature: data.temperature,
+        pressure: data.pressure,
+        windSpeed: data.windSpeed,
+        humidity: data.humidity,
+        timestamp: data.timestamp,
+      };
+
+      const url = "http://localhost/weatherApp/recorddata.php";
+
+      const options = {
+        method: "POST",
+        body: JSON.stringify(weatherData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await fetch(url, options);
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+      } else {
+        console.log("Error: " + response.status);
+      }
+    } catch (error) {
+      console.log("An error occurred:" + error);
+    }
+  }
+  // call the send data function only once a hour
+  function runOncePerHour(data) {
+    // Check if there's a previous timestamp stored in localStorage
+    const lastRunTimestamp = localStorage.getItem("lastRunTimestamp");
+
+    // If the timestamp exists and it's less than an hour ago, do not run the function
+    if (lastRunTimestamp && Date.now() - lastRunTimestamp < 60 * 60 * 1000) {
+      console.log("weather data for this hour is already saved");
+      return;
+    }
+
+    // Otherwise, run the function
+    sendData(data);
+
+    // Store the current timestamp in localStorage
+    localStorage.setItem("lastRunTimestamp", Date.now());
+  }
 });
