@@ -9,7 +9,8 @@ $database = "sumit";
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 
-function formatDateTime($timestamp) {
+function formatDateTime($timestamp)
+{
     $ukDate = new DateTime("@$timestamp");
     $ukDate->setTimezone(new DateTimeZone('Europe/London'));
     $year = $ukDate->format('Y');
@@ -19,8 +20,8 @@ function formatDateTime($timestamp) {
     $minutes = $ukDate->format('i');
     $seconds = $ukDate->format('s');
     return "$year-$month-$day $hours:$minutes:$seconds (UK time)";
-  }
-  
+}
+
 
 if (!$conn) {
     echo "Sorry, we failed to connect";

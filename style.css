@@ -1,5 +1,6 @@
 * {
-  font-family:'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
   margin: 0;
   padding: 0;
   border: border-box;
@@ -7,6 +8,7 @@
 
 body {
   background-image: linear-gradient(to right, #2b88d8, #1fbf8e);
+  background-image: url(background.jpg);
   overflow: hidden;
 }
 
@@ -18,7 +20,7 @@ body {
 }
 
 header {
-  background-image: linear-gradient(to right, #06615c, #005476);
+  background-image: linear-gradient(to right, #2b88d8, #1fbf8e);
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -240,7 +242,7 @@ p {
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -254,8 +256,8 @@ p {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   display: inline-block;
 }
 
@@ -267,16 +269,16 @@ p {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {

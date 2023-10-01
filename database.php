@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost"; 
-$username = "root"; 
-$password = ""; 
-$database = "sumit"; 
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "sumit";
 
 // Create a connection
 $conn = new mysqli($servername, $username, $password);
@@ -36,7 +36,7 @@ if ($result->num_rows == 0) {
                 windSpeed FLOAT,
                 humidity FLOAT
             )";
-        
+
         if ($conn->query($createTableQuery) === TRUE) {
             echo "Table 'weather_data' created successfully";
         } else {
